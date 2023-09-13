@@ -18,7 +18,7 @@ constructor(private principal: NavController) {}
 
 login() {
   if (this.usuario === this.alumnoSimulado && this.contrasena === this.contrasenaAlumnoSimulada) {
-    this.principal.navigateForward('/profesor-cursos');
+    this.principal.navigateForward('/alumno-inicio');
   }
     console.log('Credenciales incorrectas');
   }
