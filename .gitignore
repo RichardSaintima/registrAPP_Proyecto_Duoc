@@ -29,6 +29,8 @@ log.txt
 /out-tsc
 /bazel-out
 
+profesores/
+
 # Node
 /node_modules
 npm-debug.log

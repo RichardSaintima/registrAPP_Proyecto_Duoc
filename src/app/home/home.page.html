@@ -1,20 +1,28 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title class="ion-text-center">
+      RegistAPP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-align-items-center ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-title size="15" class="ion-text-center ion-padding-vertical">Iniciar Sesión </ion-title>
+
+  <ion-item class="ion-padding-vertical">
+    <ion-label position="floating">Nombre de Usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-padding-vertical">
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" shape="round" color="primary" (click)="login()">Iniciar Sesión</ion-button>
+
+  <ion-item [routerLink]="['/olvidar-contrasena']">
+    <p size="12" class="ion-text-center">¿Olvidaste Tu contraseña?</p>
+  </ion-item>
 </ion-content>
