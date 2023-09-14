@@ -1,5 +1,5 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title class="ion-text-center">
       RegistAPP
     </ion-title>
@@ -7,6 +7,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-align-items-center ion-padding">
+
+  <ion-img src="/assets/img/logo.png"></ion-img>
 
   <ion-title size="15" class="ion-text-center ion-padding-vertical">Iniciar Sesión </ion-title>
 
@@ -23,6 +25,6 @@
   <ion-button expand="full" shape="round" color="primary" (click)="login()">Iniciar Sesión</ion-button>
 
   <ion-item [routerLink]="['/olvidar-contrasena']">
-    <p size="12" class="ion-text-center">¿Olvidaste Tu contraseña?</p>
+    <p size="12" class="ion-text-center">¿Olvidaste tu contraseña?</p>
   </ion-item>
 </ion-content>
