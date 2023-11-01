@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./profesor-inicio/profesor-inicio.module').then( m => m.ProfesorInicioPageModule)
   },
   {
-    path: 'generar-qr/:id' ,
+    path: 'generar-qr/:nombre' ,
     loadChildren: () => import('./generar-qr/generar-qr.module').then( m => m.GenerarQRPageModule)
   },
 

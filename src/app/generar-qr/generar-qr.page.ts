@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudServicesService } from '../Services/crud-services.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-generar-qr',
@@ -9,8 +10,12 @@ import { CrudServicesService } from '../Services/crud-services.service';
 export class GenerarQRPage implements OnInit {
   texto: any;
   
-  constructor(public crudService: CrudServicesService) { }
-  
+  constructor(
+    public crudService: CrudServicesService,
+    private activatedRoute: ActivatedRoute
+    ) {
+      this.texto = this.activatedRoute.snapshot.paramMap.get('nombre');
+    }
 
   ngOnInit() {
   }

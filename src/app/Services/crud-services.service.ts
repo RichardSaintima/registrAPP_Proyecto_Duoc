@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Storage} from '@ionic/storage-angular';
 
 
 @Injectable({
@@ -64,5 +65,13 @@ export class CrudServicesService {
   ]
 
 
-  constructor() { }
+  constructor(
+    private storage: Storage
+  ) { 
+    this.storage.create();
+  }
+
+  async leer(id:string){
+    return await this.storage.get(id);
+  }
 }

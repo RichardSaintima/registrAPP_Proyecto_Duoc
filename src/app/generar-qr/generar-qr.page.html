@@ -2,15 +2,17 @@
   <ion-toolbar color="dark">
     <ion-title class="ion-text-center">
       Asistencia
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="profesor-inicio"></ion-back-button>
+      </ion-buttons>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-text color="primary"> 
+<ion-content [fullscreen]="true" class="ion-text-center">
+  <ion-text   color="primary"> 
     <h1>QR</h1>
   </ion-text>
-  <input type="text" [(ngModel)]="texto">
   <br><br>
   <qrcode [qrdata]="texto" [width]="400"></qrcode>
 </ion-content>
