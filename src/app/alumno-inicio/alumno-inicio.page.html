@@ -14,7 +14,7 @@
 
   <ion-list>
     <ion-label>Asignaturas</ion-label>
-    <ion-item *ngFor="let asignatura of asignaturas" [routerLink]="['/generar-qr/' + asignatura.id]">
+    <ion-item *ngFor="let asignatura of asignaturas" [routerLink]="['/leer-qr/' + asignatura.nombre]">
       <ion-label>{{asignatura.nombre}}</ion-label>
     </ion-item>
   </ion-list>
