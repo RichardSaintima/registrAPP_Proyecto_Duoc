@@ -18,7 +18,15 @@ const routes: Routes = [
   {
     path: 'olvidar-contrasena',
     loadChildren: () => import('./auth/olvidar-contrasena/olvidar-contrasena.module').then( m => m.OlvidarContrasenaPageModule)
+  },  {
+    path: 'inicio',
+    loadChildren: () => import('./Profesor/inicio/inicio.module').then( m => m.InicioPageModule)
   },
+  {
+    path: 'asignatura',
+    loadChildren: () => import('./Profesor/asignatura/asignatura.module').then( m => m.AsignaturaPageModule)
+  },
+
 ];
 
 @NgModule({

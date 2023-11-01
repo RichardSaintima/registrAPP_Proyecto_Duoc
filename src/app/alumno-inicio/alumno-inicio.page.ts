@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudServicesService } from '../Services/crud-services.service';
 
 @Component({
   selector: 'app-alumno-inicio',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlumnoInicioPage implements OnInit {
 
-  nombre = "Alumno";
-  constructor() { }
+  persona: any; 
+  
+  constructor(public crudService: CrudServicesService) {
+    this.persona = crudService.personas.find(persona => persona.nombre === crudService.usuarioActual.nombre);
+  }
 
   ngOnInit() {
   }
