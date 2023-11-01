@@ -1,0 +1,16 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Asistencia
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-text color="primary"> 
+    <h1>QR</h1>
+  </ion-text>
+  <input type="text" [(ngModel)]="texto">
+  <br><br>
+  <qrcode [qrdata]="texto" [width]="400"></qrcode>
+</ion-content>

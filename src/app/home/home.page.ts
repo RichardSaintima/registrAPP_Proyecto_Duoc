@@ -23,20 +23,27 @@ export class HomePage {
     const usuarioEncontrado = this.crudService.personas.find(persona => persona.nombre === this.usuario && persona.contrasena === this.contrasena);
 
     if (usuarioEncontrado) {
-      this.principal.navigateForward('/alumno-inicio');
-      this.crudService.usuarioActual = usuarioEncontrado;
-    } else {
+      if (usuarioEncontrado.ocupacion === 'profesor') {
+        this.principal.navigateForward('/profesor-inicio');
+      } 
+      else if (usuarioEncontrado.ocupacion === 'alumno') 
+      {this.principal.navigateForward('/alumno-inicio'); }
+
+      this.crudService.usuarioActual = usuarioEncontrado;  
+    } 
+
+    else {
       if (!this.usuario) {
-        this.mensError('Ingrese usuario', 'danger');
+        this.mensaje('Ingrese usuario', 'danger');
       } else if (!this.contrasena) {
-        this.mensError('Ingrese contraseña', 'danger');
+        this.mensaje('Ingrese contraseña', 'danger');
       } else {
-        this.mensError('Usuario y contraseña incorrectos', 'danger');
+        this.mensaje('Usuario y contraseña incorrectos', 'danger');
       }
     }
   }
 
-  async mensError(alerta: string, color: string) {
+  async mensaje(alerta: string, color: string) {
     const toast = await this.toastController.create({
       message: alerta,
       duration: 2000, 

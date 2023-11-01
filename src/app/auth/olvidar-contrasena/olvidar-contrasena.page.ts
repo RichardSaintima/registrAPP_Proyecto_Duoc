@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { CrudServicesService } from 'src/app/Services/crud-services.service';
 
 @Component({
   selector: 'app-olvidar-contrasena',
@@ -10,38 +11,40 @@ import { NavController } from '@ionic/angular';
 export class OlvidarContrasenaPage implements OnInit {
 
   email: String = '';
-
-  emailSimulado = 'alumno@duoc.cl'; 
+ 
   constructor(private toastController: ToastController,
-              private principal: NavController) { }
+              private principal: NavController,
+              private crudService: CrudServicesService) { }
 
   async recuperar() {
-    if (this.email === this.emailSimulado) {
+    const usuarioEncontrado = this.crudService.personas.find(persona => persona.email === this.email);
+    if (usuarioEncontrado) {
       this.principal.navigateForward('/home');
-  
-      const toast = await this.toastController.create({
-        message: 'Se ha enviado la solicitud a su correo!',
-        duration: 3000,
-        position: 'bottom',
-        color: 'success'
-      });
-      await toast.present();
-  
+                     
+      this.mensaje('Se ha enviado un correo a su cuenta', 'success');
     }
   
     else{
-  
-      const toast = await this.toastController.create({
-        message: 'Email no válido!',
-        duration: 3000,
-        position: 'bottom',
-        color: 'danger'
-      });
-      await toast.present();
+      if (!this.email) {
+        this.mensaje('Ingrese correo', 'danger');
+      }
+      else{
+        this.mensaje('Correo no registrado', 'danger');
+      }
     }
       
     }
 
+    async mensaje(alerta: string, color: string) {
+      const toast = await this.toastController.create({
+        message: alerta,
+        duration: 2000, 
+        icon: 'alert-outline',
+        position: 'bottom', 
+        color: color,
+      });
+      await toast.present();
+    }
   ngOnInit() {
   }
 

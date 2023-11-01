@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="dark">
     <ion-title class="ion-text-center">
-      Inicio Alumno
+      Inicio Profesor
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-avatar slot="start">
     <img [src]="persona.foto" >
   </ion-avatar>
-  <ion-title size="15" class="ion-text-center ion-padding-vertical">Bienvenido, {{persona.nombre}} 😁 </ion-title>
+  <ion-title size="15" class="ion-text-center ion-padding-vertical">Bienvenido, Profesor {{persona.nombre}} 😁 </ion-title>
 
   <ion-list>
     <ion-label>Asignaturas</ion-label>
@@ -18,5 +18,5 @@
       <ion-label>{{asignatura.nombre}}</ion-label>
     </ion-item>
   </ion-list>
-
+  
 </ion-content>

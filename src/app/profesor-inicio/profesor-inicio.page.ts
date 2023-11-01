@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CrudServicesService } from '../Services/crud-services.service';
 
 @Component({
-  selector: 'app-alumno-inicio',
-  templateUrl: './alumno-inicio.page.html',
-  styleUrls: ['./alumno-inicio.page.scss'],
+  selector: 'app-profesor-inicio',
+  templateUrl: './profesor-inicio.page.html',
+  styleUrls: ['./profesor-inicio.page.scss'],
 })
-export class AlumnoInicioPage implements OnInit {
+export class ProfesorInicioPage implements OnInit {
 
-  persona: any; 
+  persona: any;
   asignaturas: any;
+  
   constructor(public crudService: CrudServicesService) {
     this.persona = crudService.personas.find(persona => persona.nombre === crudService.usuarioActual.nombre),
     this.asignaturas = crudService.asignatura;
   }
+
+
 
   ngOnInit() {
   }
