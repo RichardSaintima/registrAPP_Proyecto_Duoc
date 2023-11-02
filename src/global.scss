@@ -24,3 +24,53 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* Lista inicio */
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.asignaturasfondo {
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.list-md {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+.bg-primary {
+    background: #012C56!important;
+}
+.text-white {
+    color: #fff!important;
+}
+
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.tamañotexto {
+    font-size: 1.2rem;
+}
+  
+.fuentetexto {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/*QR*/
+
