@@ -11,11 +11,18 @@
 
   <ion-title size="15" class="ion-text-center ion-padding-vertical">Restablecer Contraseña </ion-title>
 
-  <ion-item class="ion-padding-vertical">
-    <ion-label position="floating">Ingresa tu Email</ion-label>
-    <ion-input type="email" [(ngModel)]="email"></ion-input>
-  </ion-item>
+  <form [formGroup]="credencial" (ngSubmit)="recuperar()" >
 
-  <ion-button expand="full" shape="round" color="primary" (click)="recuperar()">Recuperar</ion-button>
+    <ion-item fill="solid" class="ion-margin-botton">
+      <ion-label position="floating">Ingresar tu Email</ion-label>
+      <ion-input type="email" placeholder="Ingresar tu Email" formControlName="email"></ion-input>
+      <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email no es Correcto</ion-note>
+    </ion-item>
 
+    <br>
+  
+    <ion-button expand="full" shape="round" color="primary" type="submit" [disabled]="!credencial.valid">
+      Recuperar Contraseña
+    </ion-button>
+  </form>
 </ion-content>

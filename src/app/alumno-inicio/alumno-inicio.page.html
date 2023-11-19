@@ -7,9 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-align-items-center ion-padding">
-  <ion-avatar slot="start">
-    <img [src]="persona.foto" >
-  </ion-avatar>
+
   <ion-title size="15" class="ion-text-center ion-padding-vertical">Bienvenido, {{persona.nombre}} 😁 </ion-title>
 
 <div class="card fuentetexto">
@@ -18,7 +16,8 @@
     <div class="bg-primary text-white asignaturasfondo shadow tamañotexto">
       <ion-label>Asignaturas</ion-label>
     </div>
-    <ion-item *ngFor="let asignatura of asignaturas" [routerLink]="['/leer-qr/' + asignatura.nombre]">
+    <ion-item fill="solid" *ngFor="let asignatura of asignaturas" class="ion-margin-botton"
+    [routerLink]="['/generar-qr/' + asignatura.id]">
       <ion-label>{{asignatura.nombre}}</ion-label>
     </ion-item>
   </ion-list>

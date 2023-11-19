@@ -1,16 +1,39 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="dark">
     <ion-title class="ion-text-center">
-      Generar QR
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="profesor-inicio"></ion-back-button>
-      </ion-buttons>
+      {{ esProfesor ? 'Generar QR' : 'Leer QR' }}
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-text-center"> 
   <br><br>
-  <qrcode [qrdata]="texto" [width]="400"></qrcode>
+  <ion-item *ngIf="esProfesor">
+    <ion-text>
+      <h1 color="primary">ID: {{ asignatura?.id }}</h1>
+    </ion-text>
+  </ion-item>
+  
+  <!-- <br>
+  <ion-item *ngIf="esProfesor">
+    <ion-label size="14" >Nombre:     {{ asignatura?.nombre }}</ion-label>
+  </ion-item> -->
+
+  <br>
+
+  <qrcode [qrdata]="texto" [width]="350" [allowEmptyString]="true" *ngIf="esProfesor"></qrcode>
+
+  <ion-button expand="block" color="success" *ngIf="esAlumno" (click)="LeerCode()">Scannear Código</ion-button>
+
+  <ion-item *ngIf="esAlumno">
+    <div *ngIf="datoscaneado ">
+      <p>
+          Contenido obtenido: <b>{{ datoscaneado["text"] }}</b>
+      </p>
+    </div>
+  </ion-item>
 
 </ion-content>

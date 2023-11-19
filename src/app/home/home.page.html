@@ -12,19 +12,31 @@
 
   <ion-title size="15" class="ion-text-center ion-padding-vertical">Iniciar Sesión </ion-title>
 
-  <ion-item class="ion-padding-vertical">
-    <ion-label position="floating">Nombre de Usuario</ion-label>
-    <ion-input type="text" [(ngModel)]="usuario"></ion-input>
-  </ion-item>
+  <form [formGroup]="credencial" (ngSubmit)="login()" >
 
-  <ion-item class="ion-padding-vertical">
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
-  </ion-item>
+    <ion-item fill="solid" class="ion-margin-botton">
+      <ion-label position="floating">Ingresar tu Usuario</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+      <ion-note slot="error" *ngIf="(nombre.dirty || nombre.touched) && nombre.errors">Usuario no es Correcto</ion-note>
+    </ion-item>
+    
+    <ion-item fill="solid" class="ion-padding-vertical">
+      <ion-label position="floating">Ingresar tu Contraseña</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Contraseña no es Correcto</ion-note>
+    </ion-item>
+    
+ 
+    <ion-button expand="full" shape="round" color="primary" type="submit" [disabled]="!credencial.valid">
+      Iniciar Sesión
+    </ion-button>
+    
+    <br>
 
-  <ion-button expand="full" shape="round" color="primary" (click)="login()">Iniciar Sesión</ion-button>
+    <ion-item [routerLink]="['/olvidar-contrasena']">
+      <p size="12" class="ion-text-center">¿Olvidaste tu contraseña?</p>
+    </ion-item>
+  
+  </form>
 
-  <ion-item [routerLink]="['/olvidar-contrasena']">
-    <p size="12" class="ion-text-center">¿Olvidaste tu contraseña?</p>
-  </ion-item>
 </ion-content>
