@@ -25,13 +25,9 @@ export class ApiRestService {
   usuarioActual: any;
 
   constructor(
-    private http: HttpClient,
     private firestore: Firestore,
   ) { }
 
-  get(url: string) {
-    return this.http.get(url);
-  }
 
   getAsignatura(): Observable<Asignatura[]> {
     const asignaturas = collection(this.firestore, 'asignatura');

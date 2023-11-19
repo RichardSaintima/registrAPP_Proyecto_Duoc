@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { CrudServicesService } from 'src/app/Services/Crud/crud-services.service';
 import { ApiRestService, Persona } from 'src/app/Services/api-rest.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class OlvidarContrasenaPage implements OnInit {
 
   constructor(
     private toastController: ToastController,
-    public crudService: CrudServicesService,
     private formBuilder: FormBuilder,
     private principal: NavController,
     public loadingCtrl: LoadingController,

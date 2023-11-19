@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import { CrudServicesService } from '../Services/Crud/crud-services.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiRestService, Persona } from '../Services/api-rest.service';
@@ -17,7 +16,6 @@ export class HomePage {
 
   constructor(
     private toastController: ToastController,
-    public crudService: CrudServicesService,
     private formBuilder: FormBuilder,
     private principal: NavController,
     public loadingCtrl: LoadingController,

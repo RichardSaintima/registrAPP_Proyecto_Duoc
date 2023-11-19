@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CrudServicesService } from '../Services/Crud/crud-services.service';
 import { ApiRestService, Persona } from '../Services/api-rest.service';
 
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +14,7 @@ export class AlumnoInicioPage implements OnInit {
   asignaturas: any;
   userId: string;
 
-  constructor(public crudService: CrudServicesService, 
+  constructor(
     private apirest: ApiRestService,
     private activatedRoute: ActivatedRoute,) {
       this.userId = this.activatedRoute.snapshot.paramMap.get('id');
