@@ -16,6 +16,7 @@ export class GenerarQRPage implements OnInit {
   esProfesor: boolean = false; 
   esAlumno: boolean = false; 
   datoscaneado: any = {};
+  fechaHoraEscaneo: Date | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -53,12 +54,12 @@ export class GenerarQRPage implements OnInit {
   }
 
   LeerCode() {
-    this.barcodescan.scan().then(barcodeData => {
-        this.datoscaneado = barcodeData;
-      })
-      .catch(err => {
-        console.log("Error", err);
-      });
+    this.barcodescan.scan().then((barcodeData) => {
+      this.datoscaneado = barcodeData;
+      this.fechaHoraEscaneo = new Date();
+    }).catch((err) => {
+      console.log("Error", err);
+    });
   }
 
 
