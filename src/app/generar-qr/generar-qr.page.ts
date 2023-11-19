@@ -63,7 +63,9 @@ export class GenerarQRPage implements OnInit {
 
 
   ionViewDidEnter() {
-    this.presentToast();
+    if (this.esProfesor) { 
+      this.presentToast();
+    };
   }
 
   async presentToast() {
@@ -75,6 +77,8 @@ export class GenerarQRPage implements OnInit {
     });
     toast.present();
   }
+
+  
 
   ngOnInit() {}
 }
