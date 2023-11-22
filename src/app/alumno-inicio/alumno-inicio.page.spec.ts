@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { AlumnoInicioPage } from './alumno-inicio.page';
-import { ApiRestService } from '../Services/api-rest.service';
+import { ApiRestService } from '../Services/API/api-rest.service';
 
 class MockApiRestService {
   getAsignatura() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { ApiRestService, Persona } from 'src/app/Services/api-rest.service';
+import { ApiRestService, Persona } from 'src/app/Services/API/api-rest.service';
 
 @Component({
   selector: 'app-olvidar-contrasena',
@@ -14,11 +14,11 @@ export class OlvidarContrasenaPage implements OnInit {
   public credencial: FormGroup;
 
   constructor(
-    private toastController: ToastController,
-    private formBuilder: FormBuilder,
-    private principal: NavController,
+    public toastController: ToastController,
+    public formBuilder: FormBuilder,
+    public principal: NavController,
     public loadingCtrl: LoadingController,
-    private apiRestService: ApiRestService,
+    public apiRestService: ApiRestService,
   ) {}
 
   get email() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { ApiRestService, Asignatura, Persona } from '../Services/api-rest.service';
-import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { ApiRestService, Asignatura, Persona } from '../Services/API/api-rest.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-generar-qr',
@@ -13,21 +13,32 @@ export class GenerarQRPage implements OnInit {
   texto: any;
   id: any;
   asignatura: Asignatura;
-  esProfesor: boolean = false; 
-  esAlumno: boolean = false; 
+  esProfesor: boolean = false;
+  esAlumno: boolean = false;
   datoscaneado: any = {};
   fechaHoraEscaneo: Date | null = null;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private toastController: ToastController,
-    private apiRestService: ApiRestService,
-    private barcodescan: BarcodeScanner
+    public activatedRoute: ActivatedRoute,
+    public toastController: ToastController,
+    public apiRestService: ApiRestService,
+    public barcodescan: BarcodeScanner
   ) {
     this.texto = '';
     this.id = null;
 
     const asignaturaId = this.activatedRoute.snapshot.paramMap.get('id');
+
+    // Suscribirse al usuario actual desde el servicio
+    this.apiRestService.usuarioActual$.subscribe((usuario: Persona | null) => {
+      if (usuario) {
+        if (usuario.ocupacion === 'profesor') {
+          this.esProfesor = true;
+        } else {
+          this.esAlumno = true;
+        }
+      }
+    });
 
     this.apiRestService.getAsignaturaById(asignaturaId).subscribe(
       (asignatura: Asignatura | undefined) => {
@@ -35,14 +46,6 @@ export class GenerarQRPage implements OnInit {
           this.asignatura = asignatura;
           this.texto = asignatura.nombre;
           this.id = asignatura.id;
-
-          if (this.apiRestService.usuarioActual.ocupacion === 'profesor') {
-            this.esProfesor = true;
-          } else {
-            this.esAlumno = true;
-          }
-          
-          console.log(asignatura.nombre);
         } else {
           console.error('Asignatura no encontrada.');
         }
@@ -62,11 +65,10 @@ export class GenerarQRPage implements OnInit {
     });
   }
 
-
   ionViewDidEnter() {
-    if (this.esProfesor) { 
+    if (this.esProfesor) {
       this.presentToast();
-    };
+    }
   }
 
   async presentToast() {
@@ -79,7 +81,5 @@ export class GenerarQRPage implements OnInit {
     toast.present();
   }
 
-  
-
-  ngOnInit() {}
+  ngOnInit() { }
 }

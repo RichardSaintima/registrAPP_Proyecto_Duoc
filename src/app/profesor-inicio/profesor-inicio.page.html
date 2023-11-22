@@ -3,6 +3,11 @@
     <ion-title class="ion-text-center">
       Inicio Profesor
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,18 +15,19 @@
 
   <ion-title size="15" class="ion-text-center ion-padding-vertical">Hola, Profesor@ {{persona.nombre}} 😁 </ion-title>
 
-<div class="card fuentetexto">
+  <div class="card fuentetexto">
 
-  <ion-list>
-    <div class="bg-primary text-white asignaturasfondo shadow tamañotexto">
-      <ion-label>Asignaturas</ion-label>
-    </div>
-    <ion-item fill="solid" *ngFor="let asignatura of asignaturas" class="ion-margin-botton"
+    <ion-list>
+      <div class="bg-primary text-white asignaturasfondo shadow tamañotexto">
+        <ion-label>Asignaturas</ion-label>
+      </div>
+
+      <ion-item fill="solid" *ngFor="let asignatura of asignaturas" class="ion-margin-botton"
                 [routerLink]="['/generar-qr/' + asignatura.id]">
-      <ion-label>{{asignatura.nombre}}</ion-label>
-    </ion-item>
-  </ion-list>
+        <ion-label>{{asignatura.nombre}}</ion-label>
+      </ion-item>
+    </ion-list>
 
-</div>
+  </div>
 
 </ion-content>

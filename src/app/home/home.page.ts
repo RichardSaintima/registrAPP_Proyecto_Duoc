@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ApiRestService, Persona } from '../Services/api-rest.service';
+import { ApiRestService, Persona } from '../Services/API/api-rest.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +14,11 @@ export class HomePage {
   public credencial: FormGroup;
 
   constructor(
-    private toastController: ToastController,
-    private formBuilder: FormBuilder,
-    private principal: NavController,
+    public toastController: ToastController,
+    public formBuilder: FormBuilder,
+    public principal: NavController,
     public loadingCtrl: LoadingController,
-    private apiRestService: ApiRestService,
+    public apiRestService: ApiRestService,
   ) {}
 
   get nombre() {
@@ -53,37 +52,39 @@ export class HomePage {
   
         if (usuarioEncontrado) {
           if (usuarioEncontrado.password === this.password.value) {
+            this.apiRestService.setUsuarioActual(usuarioEncontrado);
+            
             if (usuarioEncontrado.ocupacion === 'profesor') {
               this.principal.navigateForward(`/profesor-inicio/${usuarioEncontrado.id}`);
             } else if (usuarioEncontrado.ocupacion === 'estudiente') {
               this.principal.navigateForward(`/alumno-inicio/${usuarioEncontrado.id}`);
             }
-            this.apiRestService.usuarioActual = usuarioEncontrado;
-            this.mensaje('Inicio de sesión exitoso', 'success');
+            
+            this.mensaje('Inicio de sesión exitoso', 'success', 'checkmark-done-outline');
           } else {
-            this.mensaje('Contraseña incorrecta', 'danger');
+            this.mensaje('Contraseña incorrecta', 'danger', 'close-outline');
           }
         } else {
-          this.mensaje('Usuario no existe', 'danger');
+          this.mensaje('Usuario no existe', 'danger', 'close-outline');
         }
       });
     } catch (error) {
       console.error('Error durante la autenticación:', error);
-      this.mensaje('Inicio de sesión fallado', 'danger');
+      this.mensaje('Inicio de sesión fallado', 'danger', 'close-outline');
     } finally {
       await loading.dismiss();
     }
   }
 
-  async mensaje(alerta: string, color: string) {
+
+  async mensaje(alerta: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: alerta,
       duration: 2000,
-      icon: 'alert-outline',
+      icon: icon,
       position: 'bottom',
       color: color,
     });
     await toast.present();
   }
 }
-

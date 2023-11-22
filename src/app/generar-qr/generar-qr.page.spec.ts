@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { GenerarQRPage } from './generar-qr.page';
-import { ApiRestService } from '../Services/api-rest.service';
+import { ApiRestService } from '../Services/API/api-rest.service';
 
 class MockApiRestService {
   getAsignaturaById() {
