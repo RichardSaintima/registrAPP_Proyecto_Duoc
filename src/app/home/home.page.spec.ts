@@ -1,48 +1,76 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
 
 import { HomePage } from './home.page';
+import { ApiRestService, Persona } from '../Services/API/api-rest.service';
+
+class MockApiRestService {
+  usuarioActual$ = of({ nombre: 'Pedro' } as Persona);
+
+  getPersona() {
+    return of([{ nombre: 'Pedro', password: 'contrasena', ocupacion: 'estudiente', id: 'JBnkmGHv0ySDKQqxFTCy', email: 'pedro@gmai.com' }]);
+  }
+
+  setUsuarioActual(usuario: Persona | null) {
+
+  }
+}
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
-  let de: DebugElement;
-  let el: HTMLElement;
+  let apiRestService: ApiRestService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule]
+      providers: [
+        { provide: ApiRestService, useClass: MockApiRestService },
+      ],
+      imports: [IonicModule.forRoot(), ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
+    apiRestService = TestBed.inject(ApiRestService);
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should have a form with two controls (nombre and password)', () => {
+  it('verificar formulario (nombre y password)', () => {
     expect(component.credencial.contains('nombre')).toBeTruthy();
     expect(component.credencial.contains('password')).toBeTruthy();
   });
 
-  it('should make the nombre control required', () => {
+  it('verificar nombre', () => {
     let control = component.credencial.get('nombre');
     control.setValue('');
     expect(control.valid).toBeFalsy();
   });
 
-  it('should make the password control required', () => {
+  it('verificar contraseña', () => {
     let control = component.credencial.get('password');
     control.setValue('');
     expect(control.valid).toBeFalsy();
   });
 
+  it('inicio de sesion exitoso', async () => {
+    spyOn(apiRestService, 'getPersona').and.returnValue(of([{ nombre: 'Pedro', password: 'contrasena', ocupacion: 'estudiente', id: 'JBnkmGHv0ySDKQqxFTCy', email: 'pedro@gmai.com'}]));
+
+    component.credencial.patchValue({
+      nombre: 'Pedro',
+      password: 'contrasena'
+    });
+
+    await component.login();
+
+    expect(apiRestService.setUsuarioActual).toHaveBeenCalled();
+    expect(apiRestService.setUsuarioActual).toHaveBeenCalledWith(jasmine.objectContaining({ nombre: 'Pedro' }));
+    expect(component.principal.navigateForward).toHaveBeenCalledWith('/alumno-inicio/JBnkmGHv0ySDKQqxFTCy');
+    expect(component.mensaje).toHaveBeenCalledWith('Inicio de sesión exitoso', 'success', 'checkmark-done-outline');
+  });
 
 });

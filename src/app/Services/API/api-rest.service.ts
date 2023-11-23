@@ -15,7 +15,7 @@ export interface Persona {
   email: string;
   password: string;
   ocupacion: string;
-  asignatura: string;
+  // asignatura: string;
 }
 
 @Injectable({

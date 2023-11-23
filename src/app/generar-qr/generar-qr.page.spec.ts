@@ -5,20 +5,32 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { GenerarQRPage } from './generar-qr.page';
-import { ApiRestService } from '../Services/API/api-rest.service';
+import { ApiRestService, Asignatura, Persona } from '../Services/API/api-rest.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 class MockApiRestService {
-  getAsignaturaById() {
-    return of({ nombre: 'test', id: '1' });
+  getAsignatura() {
+    return of({ nombre: 'Calidad de Software', id: 'ECDxQ9xFijYb1aucRHRR', asignacion: '' } as Asignatura);
+  }
+
+  setUsuarioActual(component: GenerarQRPage, usuario: Persona | null) {
+    // Simular el BehaviorSubject para esProfesor y esAlumno
+    component.usuarioActualSubject.next(usuario);
   }
 }
 
 class MockActivatedRoute {
   snapshot = {
     paramMap: {
-      get: () => '1', // represents 'id'
+      get: () => 'ECDxQ9xFijYb1aucRHRR', // representa 'id'
     },
   };
+}
+
+class MockBarcodeScanner {
+  scan() {
+    return Promise.resolve({ text: 'escaneo exitoso' } as any);
+  }
 }
 
 describe('GenerarQRPage', () => {
@@ -32,6 +44,7 @@ describe('GenerarQRPage', () => {
       providers: [
         { provide: ApiRestService, useClass: MockApiRestService },
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
+        { provide: BarcodeScanner, useClass: MockBarcodeScanner },
       ],
     }).compileComponents();
 
@@ -40,21 +53,16 @@ describe('GenerarQRPage', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('llama a barcodescan.scan() en LeerCode', () => {
+    const mockBarcodeScanner = TestBed.inject(BarcodeScanner) as MockBarcodeScanner;
+    spyOn(mockBarcodeScanner, 'scan'); 
+    component.LeerCode(); 
+    expect(mockBarcodeScanner.scan).toHaveBeenCalled(); 
   });
 
-  it('should initialize with a defined asignatura', () => {
-    expect(component.asignatura).toBeDefined();
-  });
+  it('establece forma de una asignatura', () => {
 
-  it('should initialize with a defined texto', () => {
-    expect(component.texto).toBeDefined();
+    expect(component.asignatura).toEqual({ nombre: 'Calidad de Software', id: 'ECDxQ9xFijYb1aucRHRR', asignacion: '04' });
   });
-
-  it('should initialize with a defined id', () => {
-    expect(component.id).toBeDefined();
-  });
-
-  // Aquí puedes agregar más pruebas para el método de LeerCode y otros métodos en tu componente
 });
+

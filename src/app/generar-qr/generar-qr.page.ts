@@ -18,6 +18,7 @@ export class GenerarQRPage implements OnInit {
   datoscaneado: any = {};
   fechaHoraEscaneo: Date | null = null;
   conteoEscaneo: number = 0;
+  usuarioActualSubject: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,

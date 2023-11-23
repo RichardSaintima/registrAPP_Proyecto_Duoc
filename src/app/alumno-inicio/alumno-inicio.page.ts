@@ -10,6 +10,9 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
   styleUrls: ['./alumno-inicio.page.scss'],
 })
 export class AlumnoInicioPage implements OnInit {
+  filterAsignaturas(res: import("../Services/API/api-rest.service").Asignatura[], nombre: string): import("../Services/API/api-rest.service").Asignatura[] {
+    throw new Error('Method not implemented.');
+  }
   persona: Persona;
   asignaturas: any;
   userId: string;
