@@ -17,6 +17,7 @@ export class GenerarQRPage implements OnInit {
   esAlumno: boolean = false;
   datoscaneado: any = {};
   fechaHoraEscaneo: Date | null = null;
+  conteoEscaneo: number = 0;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -29,7 +30,6 @@ export class GenerarQRPage implements OnInit {
 
     const asignaturaId = this.activatedRoute.snapshot.paramMap.get('id');
 
-    // Suscribirse al usuario actual desde el servicio
     this.apiRestService.usuarioActual$.subscribe((usuario: Persona | null) => {
       if (usuario) {
         if (usuario.ocupacion === 'profesor') {
@@ -60,6 +60,8 @@ export class GenerarQRPage implements OnInit {
     this.barcodescan.scan().then((barcodeData) => {
       this.datoscaneado = barcodeData;
       this.fechaHoraEscaneo = new Date();
+
+      this.conteoEscaneo++;
     }).catch((err) => {
       console.log("Error", err);
     });

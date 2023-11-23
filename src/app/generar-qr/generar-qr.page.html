@@ -12,14 +12,24 @@
 <ion-content [fullscreen]="true" class="ion-text-center"> 
   <br><br>
   <ion-item *ngIf="esProfesor" class="ion-text-center">
-    <ion-text >
-      <h3 class="ion-text-center" >ID: {{ asignatura?.id }}</h3>
-    </ion-text>
+    <ion-title>Nombre: {{ asignatura?.nombre }}</ion-title>
   </ion-item>
 
   <br>
 
-  <qrcode [qrdata]="texto" [width]="350" [allowEmptyString]="true" *ngIf="esProfesor"></qrcode>
+  <qrcode [qrdata]="texto" [width]="330" [allowEmptyString]="true" *ngIf="esProfesor"></qrcode>
+
+  <ion-item *ngIf="esProfesor" class="ion-text-center">  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>ID: {{ asignatura?.id }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- <p>Nombre: {{ asignatura?.nombre }}</p> -->
+        <p>Cantidad Asistencias: {{ conteoEscaneo }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
 
   <ion-button expand="block" color="success" *ngIf="esAlumno" (click)="LeerCode()">Scannear Código</ion-button>
 
@@ -31,8 +41,8 @@
         <ion-card-title>Contenido escaneado</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>Contenido obtenido: <b>{{ datoscaneado["text"] }}</b></p>
-        <p>Fecha y hora de escaneo: {{ fechaHoraEscaneo | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+        <p>Asistencia: <b>{{ datoscaneado["text"] }}</b></p>
+        <p>Fecha y hora de Asistencia: {{ fechaHoraEscaneo | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
       </ion-card-content>
     </ion-card>
   </ion-item>  

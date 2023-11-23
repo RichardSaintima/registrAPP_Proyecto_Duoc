@@ -37,5 +37,4 @@ describe('OlvidarContrasenaPage', () => {
     expect(control.valid).toBeFalsy();
   });
 
-  // Aquí puedes agregar más pruebas para el método de recuperar y otros métodos en tu componente
 });
