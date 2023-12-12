@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiRestService, Asignatura, Persona } from '../Services/API/api-rest.service';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-generar-qr',
@@ -15,16 +14,12 @@ export class GenerarQRPage implements OnInit {
   asignatura: Asignatura;
   esProfesor: boolean = false;
   esAlumno: boolean = false;
-  datoscaneado: any = {};
-  fechaHoraEscaneo: Date | null = null;
-  conteoEscaneo: number = 0;
   usuarioActualSubject: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public toastController: ToastController,
     public apiRestService: ApiRestService,
-    public barcodescan: BarcodeScanner
   ) {
     this.texto = '';
     this.id = null;
@@ -57,17 +52,6 @@ export class GenerarQRPage implements OnInit {
     );
   }
 
-  LeerCode() {
-    this.barcodescan.scan().then((barcodeData) => {
-      this.datoscaneado = barcodeData;
-      this.fechaHoraEscaneo = new Date();
-
-      this.conteoEscaneo++;
-    }).catch((err) => {
-      console.log("Error", err);
-    });
-  }
-
   ionViewDidEnter() {
     if (this.esProfesor) {
       this.presentToast();
@@ -76,7 +60,7 @@ export class GenerarQRPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Código QR generado con éxito !',
+      message: 'Código QR generado con éxito!',
       duration: 3000,
       position: 'bottom',
       color: 'success',
@@ -84,5 +68,5 @@ export class GenerarQRPage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

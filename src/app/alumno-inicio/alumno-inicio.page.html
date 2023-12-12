@@ -22,7 +22,7 @@
       <ion-label>Asignaturas</ion-label>
     </div>
     <ion-item fill="solid" *ngFor="let asignatura of asignaturas" class="ion-margin-botton"
-    [routerLink]="['/generar-qr/' + asignatura.id]">
+    [routerLink]="['/leer-qr/' + asignatura.id]">
       <ion-label>{{asignatura.nombre}}</ion-label>
     </ion-item>
   </ion-list>

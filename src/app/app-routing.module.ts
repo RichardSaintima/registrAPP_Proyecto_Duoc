@@ -38,6 +38,11 @@ const routes: Routes = [
     path: 'generar-qr/:id' ,
     loadChildren: () => import('./generar-qr/generar-qr.module').then( m => m.GenerarQRPageModule)
   },
+  {
+    path: 'leer-qr/:id',
+    loadChildren: () => import('./leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
+  },
+
 
 
 ];
