@@ -56,7 +56,6 @@ describe('GenerarQRPage', () => {
   it('llama a barcodescan.scan() en LeerCode', () => {
     const mockBarcodeScanner = TestBed.inject(BarcodeScanner) as MockBarcodeScanner;
     spyOn(mockBarcodeScanner, 'scan'); 
-    component.LeerCode(); 
     expect(mockBarcodeScanner.scan).toHaveBeenCalled(); 
   });
 

@@ -10,7 +10,7 @@
 </ion-header>
 <br>
 <ion-content [fullscreen]="true">
-  <ion-button expand="block" color="success" *ngIf="esAlumno" (click)="LeerCode()">Scannear Código</ion-button>
+  <ion-button expand="block" color="success" (click)="LeerCode()">Scannear Código</ion-button>
 <br>
   <ion-title>Leer QR</ion-title>
 <br>
@@ -33,10 +33,6 @@
       </ion-card-header>
       <ion-card-content>
         <p>Nombre: {{ asignatura?.nombre }}</p>
-      </ion-card-content>
-      <ion-card-content>
-        <p>Cantidad de Asistencias</p>
-        <p>Cantidad Asistencias: {{ conteoEscaneo }}</p>
       </ion-card-content>
     </ion-card>
   </ion-item>

@@ -34,10 +34,10 @@ import { environment } from '../environments/environment';
     provideFirestore(() => getFirestore()),
   ],
   providers: [
-    HttpClient,
-    BarcodeScanner,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+    HttpClient,    
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BarcodeScanner
+  ],  
   bootstrap: [AppComponent],
 })
 export class AppModule {}

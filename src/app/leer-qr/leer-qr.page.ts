@@ -14,7 +14,6 @@ export class LeerQrPage implements OnInit {
   id: any;
   datoscaneado: any = {};
   fechaHoraEscaneo: Date | null = null;
-  conteoEscaneo: number = 0;
   esAlumno: boolean = false;
   esProfesor: boolean = false;
   asignatura: Asignatura;
@@ -57,22 +56,12 @@ export class LeerQrPage implements OnInit {
   }
 
   ngOnInit() {
+    
   }
   LeerCode() {
-    if (this.platform.is('cordova')) {
-      if (window.hasOwnProperty('cordova')) {
-        this.barcodescan.scan();
-      } else {
-        console.error("Cordova no está disponible");
-      }
-    } else {
-      console.warn('Cordova no está disponible. Asegúrate de ejecutar tu aplicación en un dispositivo o emulador.');
-    }
-
     this.barcodescan.scan().then((barcodeData) => {
       this.datoscaneado = barcodeData;
       this.fechaHoraEscaneo = new Date();
-      this.conteoEscaneo++;
     }).catch((err) => {
       console.log("Error", err);
     });
